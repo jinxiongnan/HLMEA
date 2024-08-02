@@ -14,6 +14,7 @@ conda env create -f environment.yml
 The expected structure of files is:
 ```
 HLMEA
+ |-- scripts
  |-- dataset
  |    |-- DBP15K_FR_EN
  |    |-- DBP15K_JA_EN
@@ -24,5 +25,12 @@ HLMEA
  |    |-- DBP100K_FR_EN_V1
  |    |-- DW15K_V1
  |    |-- DY15K_V1
- |-- scripts
+```
+
+# How to use
+Firstly, modify llm_call.py with your API key (line 13), service URL (line 32), and access token (line 45).
+Then, run the script:
+```
+cd scripts
+xxx
 ```
