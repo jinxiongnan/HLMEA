@@ -29,8 +29,16 @@ HLMEA
 
 # How to use
 Firstly, modify llm_call.py with your API key (line 13), service URL (line 32), and access token (line 45).
-Then, run the script:
+
+Then, generate TRE triples based on the datasets, e.g., DBP15K_ZH_EN:
 ```
 cd scripts
-xxx
+python ent_triple_generation.py -d=dze
 ```
+
+Finally, execute HLMEA:
+```
+python overall_process.py -d=dze -p=labse -l=gpt3.5 -m=train -r=0
+```
+
+More details about arguments can be found using the -h option or referring to the code.
