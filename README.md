@@ -9,6 +9,7 @@ In this paper, we propose HLMEA, a novel hybrid language model-based unsupervise
 To run the script, you need to install the conda first and then the following environment:
 ```
 conda env create -f environment.yml
+conda activate al4ea
 ```
 
 The expected structure of files is:
