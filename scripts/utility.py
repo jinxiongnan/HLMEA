@@ -858,16 +858,17 @@ if __name__ == '__main__':
     #### split_with_mode
     ## ['DBP15K_FR_EN', 'DBP15K_JA_EN', 'DBP15K_ZH_EN', 'DW15K_V1', 'DY15K_V1',
     # 'DBP15K_DE_EN_V1', 'DBP15K_FR_EN_V1', 'DBP100K_DE_EN_V1', 'DBP100K_FR_EN_V1']
-    dataset_name = 'DW15K_V1'
-    target_ent_list = ['ent1', 'ent2']
-    ea_data_mode_list = ['train-20', 'test-80']
-    for target_ent in target_ent_list:
-        for ea_data_mode in ea_data_mode_list:
-            input_file_path = os.path.join(os.getcwd(), '..', 'output', 'ent_triple_dict', dataset_name,
-                                           '%s_triple=all=5=rand.json' % target_ent)
-            split_with_mode(input_file_path, dataset_name, ea_data_mode)
+    # dataset_name = 'DW15K_V1'
+    # target_ent_list = ['ent1', 'ent2']
+    # ea_data_mode_list = ['train-20', 'test-80']
+    # for target_ent in target_ent_list:
+    #     for ea_data_mode in ea_data_mode_list:
+    #         input_file_path = os.path.join(os.getcwd(), '..', 'output', 'ent_triple_dict', dataset_name,
+    #                                        '%s_triple=all=5=rand.json' % target_ent)
+    #         split_with_mode(input_file_path, dataset_name, ea_data_mode)
 
     # # ['DBP15K_ZH_EN', 'DBP15K_JA_EN', 'DBP15K_FR_EN', 'DW15K_V1', 'DY15K_V1',
     # # 'DBP15K_DE_EN_V1', 'DBP15K_FR_EN_V1', 'DBP100K_DE_EN_V1', 'DBP100K_FR_EN_V1']
-    # dataset_name = 'DBP100K_DE_EN_V1'
+    dataset_name = 'DY15K_V1'
     # compute_dataset_statistics(dataset_name)
+    get_most_k_degree_ent(dataset_name, k=5)

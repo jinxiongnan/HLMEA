@@ -4,8 +4,9 @@ import os
 from tqdm import tqdm
 
 from python_scripts.llm_classification import get_attr_and_rel_filenames, get_random_samples_from_dict
+from python_scripts.overall_process import parse_dataset_name, parse_ea_data_mode
 from utility import read_groundtruth_with_mode, get_element_triples, get_frequent_rel_and_attr, \
-    read_ent_first_attr_triples, read_ent_first_rel_triples
+    read_ent_first_attr_triples, read_ent_first_rel_triples, split_with_mode
 import argparse
 
 
@@ -122,6 +123,10 @@ def add_single_element_triple(ent_triple_dict: dict, ent: str, element_triples: 
 
 
 def generate_ent_triple(dataset_name: str, ea_data_mode: str, num_triple: int, triple_strategy: str):
+    # complete dataset_name and ea_data_mode
+    dataset_name = parse_dataset_name(dataset_name)
+    ea_data_mode = parse_ea_data_mode(ea_data_mode)
+
     gt_dict = read_groundtruth_with_mode(dataset_name, ea_data_mode)
     ent1_list = list(gt_dict.keys())
     ent2_list = list(gt_dict.values())
@@ -156,12 +161,16 @@ def generate_ent_triple(dataset_name: str, ea_data_mode: str, num_triple: int, t
     with open(ent1_triple_file_path, 'w', encoding='utf-8') as f:
         json.dump(ent1_triple_dict, f, ensure_ascii=False, indent=4)
         print('Generated file ... %s' % ent1_triple_file_path)
+    split_with_mode(ent1_triple_file_path, dataset_name, 'train-20')
+    split_with_mode(ent1_triple_file_path, dataset_name, 'test-80')
 
     ent2_triple_file_name = 'ent2_triple=%s=%d=%s.json' % (ea_data_mode, num_triple, triple_strategy)
     ent2_triple_file_path = os.path.join(output_dir, ent2_triple_file_name)
     with open(ent2_triple_file_path, 'w', encoding='utf-8') as f:
         json.dump(ent2_triple_dict, f, ensure_ascii=False, indent=4)
         print('Generated file ... %s' % ent2_triple_file_path)
+    split_with_mode(ent2_triple_file_path, dataset_name, 'train-20')
+    split_with_mode(ent2_triple_file_path, dataset_name, 'test-80')
 
     return 0
 
@@ -176,3 +185,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     generate_ent_triple(args.dataset_name, args.ea_data_mode, args.num_triple, args.triple_strategy)
+
+    # dataset_name = 'dy'
+    # ea_data_mode = 'all'
+    # num_triple = 20
+    # triple_strategy = 'freq'
+    # generate_ent_triple(dataset_name, ea_data_mode, num_triple, triple_strategy)

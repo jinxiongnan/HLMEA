@@ -1,5 +1,6 @@
 import copy
 import random
+import time
 
 from llm_call import get_response_from_llm
 from utility import read_ent_first_rel_triples, read_ent_first_attr_triples, read_groundtruth_with_mode, \
@@ -268,7 +269,12 @@ def prompt_generation(dataset_name: str, llm_mode: str, ea_data_mode: str, tripl
 def llm_classify(dataset_name: str, llm_mode: str, ea_data_mode: str, triple_sel: str, exp_sel: str,
                  ent1: str, ent2_list: list, llm_type: str, llm_model: str, llm_temp: str):
     prompt = prompt_generation(dataset_name, llm_mode, ea_data_mode, triple_sel, exp_sel, ent1, ent2_list)
+
+    # start_time = time.time()
     response = get_response_from_llm(llm_type, prompt, llm_model, llm_temp)
+    # end_time = time.time()
+    # execution_time = end_time - start_time
+    # print(f"execution time：{execution_time} seconds")
 
     return response
 

@@ -147,6 +147,8 @@ def parse_ea_data_mode(abbr_ea_data_mode: str):
         full_ea_data_mode = 'train-20'
     elif abbr_ea_data_mode == 'test':
         full_ea_data_mode = 'test-80'
+    elif abbr_ea_data_mode == 'all':
+        full_ea_data_mode = 'all'
     else:
         raise RuntimeError('Unsupported abbr_ea_data_mode: %s' % abbr_ea_data_mode)
 
@@ -273,6 +275,6 @@ if __name__ == '__main__':
          args.triple_sel, args.tar_sel, args.debug_mode, args.llm_mode, args.max_rep, args.exp_sel,
          args.llm_temp, args.train_percentage)
 
-    # main(dataset_name='dze', ptm_model_name='labse', llm_type='gpt3.5', ea_data_mode='train', round=0,
-    #      tar_sel='freq-3', triple_sel='ptm-5-triple-freq', debug_mode=False, llm_mode='zs', max_rep=5, exp_sel='',
-    #      llm_temp='0', train_percentage=0.9)
+    # main(dataset_name='dy', ptm_model_name='labse', llm_type='qwen', ea_data_mode='train', round=0,
+    #      debug_mode=False, llm_mode='zs', max_rep=3, exp_sel='', llm_temp='0', train_percentage=0.9,
+    #      tar_sel='freq-20', triple_sel='ptm-20-triple-freq')
